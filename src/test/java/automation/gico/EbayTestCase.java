@@ -11,6 +11,7 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.chrome.ChromeOptions;
 import org.openqa.selenium.firefox.FirefoxDriver;
+import org.openqa.selenium.support.ui.Select;
 import org.testng.annotations.AfterClass;
 import org.testng.annotations.AfterTest;
 import org.testng.annotations.BeforeClass;
@@ -34,6 +35,25 @@ public class EbayTestCase {
 			  System.out.println("Related Links: "+relLink.getText());
 		  }
 		  Thread.sleep(2000);
+		  driver.findElement(By.id("gh-ac")).clear();
+		  driver.findElement(By.id("gh-ac")).sendKeys("iphone 13");
+		  driver.findElement(By.id("gh-btn")).click();
+		  driver.findElement(By.xpath("//*[@id=\"srp-river-results\"]/ul/li[2]/div/div[2]/a")).click();
+		  
+		  Thread.sleep(2000);
+		  
+		  for (String handle : driver.getWindowHandles()) {
+		    	driver.switchTo().window(handle);
+		    	}
+		  
+		  Select colSel = new Select(driver.findElement(By.id("msku-sel-1")));
+		  
+		  colSel.selectByVisibleText("Blue");
+		  driver.findElement(By.id("isCartBtn_btn")).click();
+		  
+		  Thread.sleep(2000);
+		  
+		  
 		  
 	  }catch(Exception exp) {
 		  exp.printStackTrace();
